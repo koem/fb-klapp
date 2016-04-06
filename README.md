@@ -4,7 +4,7 @@
 
 * Deine Pinnwand besteht zu 50% aus diesen total unkreativen "Hans Wurst hat das und das geteilt" Meldungen? Einfach zuklappen!
 * Dich interessiert nicht, dass schon wieder jemand sein Profilbild geändert hat? Klappe zu!
-* Dich interessiert nicht, was irgendwem "gefällt"? Zuklappen!
+* Dich interessiert nicht, was dauernd irgendwem "gefällt"? Zuklappen!
 * Das neue Profilbild von Petra Pusemuckel interessiert dich doch? Einfach die Meldung wieder aufklappen!
 
 (Dies ist ein Greasemonkey-Script, es wird also nur im Firefox funktionieren. Eventuell auch mit Tampermonkey in Chrome.)
