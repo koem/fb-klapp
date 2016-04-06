@@ -6,9 +6,9 @@
 
 // Konfiguration für einzelne Arten von Meldungen
 
-// Beiträge dieser Personen generell nicht ausblenden
+// Beiträge dieser Personen generell nicht zuklappen
 
-nicht_ausblenden = [ "Karla Kolumna", "Rita Kimmkorn", ];
+nicht_zuklappen = [ "Karla Kolumna", "Rita Kimmkorn", ];
 
 // mögliche Werte: 0 = nichts unternehmen, 1 = zuklappen
 
@@ -26,7 +26,6 @@ alles_andere =                        0
 // Konfiguration ENDE - Finger weg vom Rest!
 
 // TODO: manche Beträge haben ein Bild vorm Namen -> buttons davor
-// TODO: auf github hochladen - buttons nach github verlinken
 
 /**
  * Fast ID generator based on work on UUID generator by Jeff Ward (jcward.com).
@@ -51,7 +50,7 @@ function unhide(content, button) {
   $("#" + content).show();
 }
 
-function ausblenden(this_node) {
+function zuklappen(this_node) {
 
     // as we can have nested things like "X likes that Y has commented",
     // we need to find the top element of these
@@ -87,16 +86,16 @@ function ausblenden(this_node) {
           || alles_andere > 0
       ) {
 
-        // ausblenden: jNode.closest('div[data-testid="fbfeed_story"]').remove();
+        // ganz entfernen: jNode.closest('div[data-testid="fbfeed_story"]').remove();
 
         // minimize 
 
-        // check if post with this name inside should not be altered
+        // check if post with this name inside should not be folded
         
         var toptext = topnode.text();
-        var len = nicht_ausblenden.length;
+        var len = nicht_zuklappen.length;
         for (var i = 0; i < len; i++) {
-          if (toptext.indexOf(nicht_ausblenden[i]) > -1) {
+          if (toptext.indexOf(nicht_zuklappen[i]) > -1) {
             return;
           }
         }
@@ -109,10 +108,12 @@ function ausblenden(this_node) {
         
         // hide content
 
+        // original article
         var node = topnode.find('.userContent');
         var wrapper = $("<div class='fbsa_" + id_content + "'></div>").hide();
         node.next().wrap(wrapper);
         
+        // comment of user who shared something
         wrapper = $("<div class='fbsa_" + id_content + "'></div>").hide();
         node.wrap(wrapper);
         
@@ -140,12 +141,11 @@ function ausblenden(this_node) {
             + id_hide + "' style='margin-right:8px'><span><img src='https://raw.githubusercontent.com/koem/fb-klapp/master/zu.png'></span></a>").hide();
         this_node.prepend(button_show);
         this_node.prepend(button_hide);
-
       }
     }
 }
 
-waitForKeyElements ("span.fwn.fcg", ausblenden, false);
+waitForKeyElements ("span.fwn.fcg", zuklappen, false);
 
 /*--- waitForKeyElements():  A utility function, for Greasemonkey scripts,
     that detects and handles AJAXed content.
