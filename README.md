@@ -19,7 +19,7 @@
 
 ## Ruhe genießen
 
-Öffne Firefox: https://www.facebook.com/?sk=h_chr
+Öffne Facebook: https://www.facebook.com/?sk=h_chr
 
 Zugeklappte Meldungen kannst du nun mit dem Doppelpfeil-Symbol auf- und wieder zuklappen.
 
