@@ -7,7 +7,9 @@
 * Dich interessiert nicht, was dauernd irgendwem "gefällt"? Klappe zu!
 * Das neue Profilbild von Petra Pusemuckel interessiert dich doch? Einfach die Meldung wieder aufklappen!
 
-(Dies ist ein Greasemonkey-Script, es wird also nur im Firefox funktionieren. Eventuell auch mit Tampermonkey in Chrome.)
+*(Dies ist ein Greasemonkey-Script, es wird also nur im Firefox funktionieren. Eventuell auch mit Tampermonkey in Chrome.)*
+
+![Screenshot](https://raw.githubusercontent.com/koem/fb-klapp/master/screenshot.png)
 
 ## Installieren
 
