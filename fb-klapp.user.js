@@ -8,7 +8,7 @@
 
 // Beiträge dieser Personen generell nicht ausblenden
 
-nicht_ausblenden = [ "Siska Samveda Priegnitz", "Robert Hanne", ];
+nicht_ausblenden = [ "Karla Kolumna", "Rita Kimmkorn", ];
 
 // mögliche Werte: 0 = nichts unternehmen, 1 = zuklappen
 
@@ -131,13 +131,13 @@ function ausblenden(this_node) {
             + "$(\".fbsa_" + id_show + "\").hide();"
             + "$(\".fbsa_" + id_hide + "\").show();"
             + "' title='anzeigen' class='fbsa_" 
-            + id_show + "' style='margin-right:8px'><span><img src='http://koem.hamal.uberspace.de/fb_unannoy/plus2.png'></span></a>");
+            + id_show + "' style='margin-right:8px'><span><img src='https://raw.githubusercontent.com/koem/fb-klapp/master/auf.png'></span></a>");
         var button_hide = $("<a href='#' onclick='" 
             + "$(\".fbsa_" + id_content + "\").hide();"
             + "$(\".fbsa_" + id_show + "\").show();"
             + "$(\".fbsa_" + id_hide + "\").hide();"
             + "' title='anzeigen' class='fbsa_" 
-            + id_hide + "' style='margin-right:8px'><span><img src='http://koem.hamal.uberspace.de/fb_unannoy/minus2.png'></span></a>").hide();
+            + id_hide + "' style='margin-right:8px'><span><img src='https://raw.githubusercontent.com/koem/fb-klapp/master/zu.png'></span></a>").hide();
         this_node.prepend(button_show);
         this_node.prepend(button_hide);
 
