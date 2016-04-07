@@ -12,7 +12,10 @@ nicht_zuklappen = [ "Karla Kolumna", "Rita Kimmkorn", ];
 
 // mögliche Werte: 0 = nichts unternehmen, 1 = zuklappen
 
-hat_geteilt =                         1
+hat_beitrag_geteilt =                 1
+hat_foto_geteilt =                    1
+hat_video_geteilt =                   1
+hat_erinnerung_geteilt =              0
 mit_gefaellt_mir_markiert =           1
 hat_das_kommentiert =                 1
 hat_auf_einen_kommentar_geantwortet = 1
@@ -21,6 +24,7 @@ profilbild_aktualisiert =             1
 titelbild_aktualisiert =              1
 hat_neue_fotos_hinzugefuegt =         0
 nimmt_an_einer_veranstaltung_teil =   0
+wurde_markiert =                      1
 alles_andere =                        0
 
 // Konfiguration ENDE - Finger weg vom Rest!
@@ -71,19 +75,23 @@ function zuklappen(this_node) {
 
       var text = this_node.text();
 
-      if (   ( hat_geteilt > 0 && / geteilt\./.test(text) )
-          || ( mit_gefaellt_mir_markiert > 0 && ( 
+      if (   ( hat_beitrag_geteilt == 1 && / Beitrag geteilt\./.test(text) )
+          || ( hat_foto_geteilt == 1 && / Foto geteilt\./.test(text) )
+          || ( hat_video_geteilt == 1 && / Video geteilt\./.test(text) )
+          || ( hat_erinnerung_geteilt == 1 && / hat eine Erinnerung geteilt\./.test(text) )
+          || ( mit_gefaellt_mir_markiert == 1 && ( 
               / gefällt das\./.test(text) 
               || / mit .Gefällt mir. markiert\./.test(text) 
              ) )
-          || ( hat_das_kommentiert > 0 && / hat das kommentiert\./.test(text) )
-          || ( hat_auf_einen_kommentar_geantwortet > 0 && / hat auf einen Kommentar dazu geantwortet\./.test(text) )
-          || ( hat_darauf_reagiert > 0 && / hat darauf reagiert\./.test(text) )
-          || ( profilbild_aktualisiert > 0 && / hat [^ ]* Profilbild aktualisiert\./.test(text) )
-          || ( titelbild_aktualisiert > 0 && / hat [^ ]* Titelbild aktualisiert\./.test(text) )
-          || ( hat_neue_fotos_hinzugefuegt > 0 && / hat [^ ]* neue Fotos hinzugefügt/.test(text) )
-          || ( nimmt_an_einer_veranstaltung_teil > 0 && / nimmt an einer Veranstaltung teil\./.test(text) )
-          || alles_andere > 0
+          || ( hat_das_kommentiert == 1 && / (?:hat|haben) das kommentiert\./.test(text) )
+          || ( hat_auf_einen_kommentar_geantwortet == 1 && / hat auf einen Kommentar dazu geantwortet\./.test(text) )
+          || ( hat_darauf_reagiert == 1 && / hat darauf reagiert\./.test(text) )
+          || ( profilbild_aktualisiert == 1 && / hat [^ ]* Profilbild aktualisiert\./.test(text) )
+          || ( titelbild_aktualisiert == 1 && / hat [^ ]* Titelbild aktualisiert\./.test(text) )
+          || ( hat_neue_fotos_hinzugefuegt == 1 && / hat (?:[^ ]* neue Fotos|ein neues Foto) hinzugefügt/.test(text) )
+          || ( nimmt_an_einer_veranstaltung_teil == 1 && / nimmt an einer Veranstaltung teil\./.test(text) )
+          || ( wurde_markiert == 1 && / wurde markiert\./.test(text) )
+          || alles_andere == 1
       ) {
 
         // ganz entfernen: jNode.closest('div[data-testid="fbfeed_story"]').remove();

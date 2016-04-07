@@ -15,8 +15,7 @@
 
 1. Installier das Greasemonkey Addon in deinen Firefox: https://addons.mozilla.org/de/firefox/addon/greasemonkey/
 1. Starte Firefox neu
-1. Öffne die Datei **fb-klapp.user.js**: https://github.com/koem/fb-klapp/blob/master/fb-klapp.user.js
-1. Klick auf "Raw"
+1. Öffne die Datei **fb-klapp.user.js**: https://github.com/koem/fb-klapp/raw/master/fb-klapp.user.js
 1. Klick auf "Installieren"
 
 ## Ruhe genießen
