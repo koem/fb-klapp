@@ -31,7 +31,7 @@ So kannst du einstellen, was zugeklappt werden soll und was nicht:
 1. Wähl im Firefox-Menü: Extras &gt; Greasemonkey &gt; Benutzerskripte verwalten
 1. Klick auf "Einstellungen" neben "FB klapp"
 1. Klick auf "Dieses Benutzerscript bearbeiten" - ein Editor geht auf
-1. In der Zeile "nicht_ausblenden = ...": trage hier die Namen der FB Freunde und Seiten ein, die von FB klapp ignoriert werden sollen. Jeder Name muss genau so wie in FB geschrieben werden und in doppelte Hochkommata (Gänsefüßchen) eingefasst werden. Hinter jeden Namen gehört ein Komma. Alles was diese Leute / Seiten / Gruppen posten wird also nicht zugeklappt, sondern bleibt so wie gehabt.
+1. In der Zeile "nicht_zuklappen = ...": trage hier die Namen der FB Freunde und Seiten ein, die von FB klapp ignoriert werden sollen. Jeder Name muss genau so wie in FB geschrieben werden und in doppelte Hochkommata (Gänsefüßchen) eingefasst werden. Hinter jeden Namen gehört ein Komma. Alles was diese Leute / Seiten / Gruppen posten wird also nicht zugeklappt, sondern bleibt so wie gehabt.
 1. In den Zeilen ab "hat_geteilt" kannst du bestimmen, welche Arten von Meldungen zugeklappt werden sollen (= 1), und welche nicht (= 0).
 1. Klick auf "Speichern" und schließ das Editor-Fenster
 1. Die Änderungen werden erst wirksam, wenn du deine Facebook-Seite erneut lädst (F5 drücken).
