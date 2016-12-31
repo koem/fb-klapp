@@ -6,8 +6,9 @@
 * Dich interessiert nicht, dass schon wieder jemand sein Profilbild geändert hat? Zuklappen!
 * Dich interessiert nicht, was dauernd irgendwem "gefällt"? Klappe zu!
 * Das neue Profilbild von Petra Pusemuckel interessiert dich aber doch? Einfach die Meldung wieder aufklappen!
+* BONUS: Vorgeschlagene Beitrage interessieren dich nicht? Sie werden von fb-klapp entfernt!
 
-*(Dies ist ein Greasemonkey-Script, es wird also nur im Firefox funktionieren. Eventuell auch mit Tampermonkey in Chrome.)*
+*(Dies ist ein Greasemonkey-Script, es wird also im Firefox funktionieren. Eventuell auch mit Tampermonkey in Chrome.)*
 
 ![Screenshot](https://raw.githubusercontent.com/koem/fb-klapp/master/screenshot.png)
 

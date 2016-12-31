@@ -15,6 +15,7 @@ nicht_zuklappen = [ "Karla Kolumna", "Rita Kimmkorn", ];
 hat_beitrag_geteilt =                 1
 hat_foto_geteilt =                    1
 hat_video_geteilt =                   1
+hat_link_geteilt =                    1
 hat_erinnerung_geteilt =              0
 mit_gefaellt_mir_markiert =           1
 hat_das_kommentiert =                 1
@@ -63,92 +64,100 @@ function zuklappen(this_node) {
   
     var topnode = this_node.closest('div[data-testid="fbfeed_story"]');
 
-    if (! topnode.hasClass('fb_share_away')) {
+    if (! topnode.hasClass('fb_klapp')) {
 
-      topnode.addClass('fb_share_away');
+      topnode.addClass('fb_klapp');
 
-      // find the first "likes/commented/..." element
+      var text = topnode.text();
+      if ( /^Vorgeschlagener.Beitrag/.test(text) ) {
 
-      var this_node = topnode.find("span.fwn.fcg:first");
+         // hide ads
+         $(topnode).hide();
+      
+      } else {
 
-      // check if it contains "likes/commented on/..." or something else we may want to hide
+          // find the first "likes/commented/..." element
 
-      var text = this_node.text();
+          var this_node = topnode.find("span.fwn.fcg:first");
 
-      if (   ( hat_beitrag_geteilt == 1 && / Beitrag geteilt\./.test(text) )
-          || ( hat_foto_geteilt == 1 && / Foto geteilt\./.test(text) )
-          || ( hat_video_geteilt == 1 && / Video geteilt\./.test(text) )
-          || ( hat_erinnerung_geteilt == 1 && / hat eine Erinnerung geteilt\./.test(text) )
-          || ( mit_gefaellt_mir_markiert == 1 && ( 
-              / gefällt das\./.test(text) 
-              || / mit .Gefällt mir. markiert\./.test(text) 
-             ) )
-          || ( hat_das_kommentiert == 1 && / (?:hat|haben) das kommentiert\./.test(text) )
-          || ( hat_auf_einen_kommentar_geantwortet == 1 && / hat auf einen Kommentar dazu geantwortet\./.test(text) )
-          || ( hat_darauf_reagiert == 1 && / hat darauf reagiert\./.test(text) )
-          || ( profilbild_aktualisiert == 1 && / hat [^ ]* Profilbild aktualisiert\./.test(text) )
-          || ( titelbild_aktualisiert == 1 && / hat [^ ]* Titelbild aktualisiert\./.test(text) )
-          || ( hat_neue_fotos_hinzugefuegt == 1 && / hat (?:[^ ]* neue Fotos|ein neues Foto) hinzugefügt/.test(text) )
-          || ( nimmt_an_einer_veranstaltung_teil == 1 && / nimmt an einer Veranstaltung teil\./.test(text) )
-          || ( wurde_markiert == 1 && / wurde markiert\./.test(text) )
-          || alles_andere == 1
-      ) {
+          // check if it contains "likes/commented on/..." or something else we may want to hide
 
-        // ganz entfernen: jNode.closest('div[data-testid="fbfeed_story"]').remove();
+          var text = this_node.text();
 
-        // minimize 
+          if (   ( hat_beitrag_geteilt == 1 && / Beitrag geteilt\./.test(text) )
+              || ( hat_foto_geteilt == 1 && / Foto geteilt\./.test(text) )
+              || ( hat_video_geteilt == 1 && / Video geteilt\./.test(text) )
+              || ( hat_link_geteilt == 1 && / hat einen Link geteilt\./.test(text) )
+              || ( hat_erinnerung_geteilt == 1 && / hat eine Erinnerung geteilt\./.test(text) )
+              || ( mit_gefaellt_mir_markiert == 1 
+                  && / (?:gefällt das|mit .Gefällt mir. markiert)\./.test(text) )
+              || ( hat_das_kommentiert == 1 && / (?:(?:hat|haben) das|hat einen Beitrag \([0-9]*\. [^ ]*\)) kommentiert\./.test(text) )
+              || ( hat_auf_einen_kommentar_geantwortet == 1 && / hat auf einen Kommentar dazu geantwortet\./.test(text) )
+              || ( hat_darauf_reagiert == 1 && / hat darauf reagiert\./.test(text) )
+              || ( profilbild_aktualisiert == 1 && / hat [^ ]* Profilbild aktualisiert\./.test(text) )
+              || ( titelbild_aktualisiert == 1 && / hat [^ ]* Titelbild aktualisiert\./.test(text) )
+              || ( hat_neue_fotos_hinzugefuegt == 1 && / hat (?:[^ ]* neue Fotos|ein neues Foto) hinzugefügt/.test(text) )
+              || ( nimmt_an_einer_veranstaltung_teil == 1 && / nimmt an einer Veranstaltung teil\./.test(text) )
+              || ( wurde_markiert == 1 && / wurde markiert\./.test(text) )
+              || alles_andere == 1
+          ) {
 
-        // check if post with this name inside should not be folded
-        
-        var toptext = topnode.text();
-        var len = nicht_zuklappen.length;
-        for (var i = 0; i < len; i++) {
-          if (toptext.indexOf(nicht_zuklappen[i]) > -1) {
-            return;
+            // ganz entfernen: jNode.closest('div[data-testid="fbfeed_story"]').remove();
+
+            // minimize 
+
+            // check if post with this name inside should not be folded
+
+            var toptext = topnode.text();
+            var len = nicht_zuklappen.length;
+            for (var i = 0; i < len; i++) {
+              if (toptext.indexOf(nicht_zuklappen[i]) > -1) {
+                return;
+              }
+            }
+
+            // uuids for buttons and hidden content
+
+            var id_show = ID.generate();
+            var id_hide = ID.generate();
+            var id_content = ID.generate();
+
+            // hide content
+
+            // original article
+            var node = topnode.find('.userContent');
+            var wrapper = $("<div class='fbsa_" + id_content + "'></div>").hide();
+            node.next().wrap(wrapper);
+
+            // comment of user who shared something
+            wrapper = $("<div class='fbsa_" + id_content + "'></div>").hide();
+            node.wrap(wrapper);
+
+            // hide comments
+
+            node = topnode.find('.commentable_item');
+            if (node != null) {
+              wrapper = $("<div class='fbsa_" + id_content + "'></div>").hide();
+              node.wrap(wrapper);
+            }
+
+            // add buttons to show / hide content
+
+            var button_show = $("<a href='#' onclick='" 
+                + "$(\".fbsa_" + id_content + "\").show();"
+                + "$(\".fbsa_" + id_show + "\").hide();"
+                + "$(\".fbsa_" + id_hide + "\").show();"
+                + "' title='anzeigen' class='fbsa_" 
+                + id_show + "' style='margin-right:8px'><span><img src='https://raw.githubusercontent.com/koem/fb-klapp/master/auf.png'></span></a>");
+            var button_hide = $("<a href='#' onclick='" 
+                + "$(\".fbsa_" + id_content + "\").hide();"
+                + "$(\".fbsa_" + id_show + "\").show();"
+                + "$(\".fbsa_" + id_hide + "\").hide();"
+                + "' title='anzeigen' class='fbsa_" 
+                + id_hide + "' style='margin-right:8px'><span><img src='https://raw.githubusercontent.com/koem/fb-klapp/master/zu.png'></span></a>").hide();
+            this_node.prepend(button_show);
+            this_node.prepend(button_hide);
           }
-        }
-
-        // uuids for buttons and hidden content
-        
-        var id_show = ID.generate();
-        var id_hide = ID.generate();
-        var id_content = ID.generate();
-        
-        // hide content
-
-        // original article
-        var node = topnode.find('.userContent');
-        var wrapper = $("<div class='fbsa_" + id_content + "'></div>").hide();
-        node.next().wrap(wrapper);
-        
-        // comment of user who shared something
-        wrapper = $("<div class='fbsa_" + id_content + "'></div>").hide();
-        node.wrap(wrapper);
-        
-        // hide comments
-        
-        node = topnode.find('.commentable_item');
-        if (node != null) {
-          wrapper = $("<div class='fbsa_" + id_content + "'></div>").hide();
-          node.wrap(wrapper);
-        }
-
-        // add buttons to show / hide content
-
-        var button_show = $("<a href='#' onclick='" 
-            + "$(\".fbsa_" + id_content + "\").show();"
-            + "$(\".fbsa_" + id_show + "\").hide();"
-            + "$(\".fbsa_" + id_hide + "\").show();"
-            + "' title='anzeigen' class='fbsa_" 
-            + id_show + "' style='margin-right:8px'><span><img src='https://raw.githubusercontent.com/koem/fb-klapp/master/auf.png'></span></a>");
-        var button_hide = $("<a href='#' onclick='" 
-            + "$(\".fbsa_" + id_content + "\").hide();"
-            + "$(\".fbsa_" + id_show + "\").show();"
-            + "$(\".fbsa_" + id_hide + "\").hide();"
-            + "' title='anzeigen' class='fbsa_" 
-            + id_hide + "' style='margin-right:8px'><span><img src='https://raw.githubusercontent.com/koem/fb-klapp/master/zu.png'></span></a>").hide();
-        this_node.prepend(button_show);
-        this_node.prepend(button_hide);
       }
     }
 }
