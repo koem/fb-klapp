@@ -8,7 +8,7 @@
 
 // Beiträge dieser Personen generell nicht zuklappen
 
-nicht_zuklappen = [ "Karla Kolumna", "Rita Kimmkorn", ];
+nicht_zuklappen = [ "Siska Samveda Priegnitz", "Robert Hanne", "Jürgen Todenhöfer", "Stefan Pue" ];
 
 // mögliche Werte: 0 = nichts unternehmen, 1 = zuklappen
 
